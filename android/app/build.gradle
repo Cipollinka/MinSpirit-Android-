@@ -79,7 +79,7 @@ android {
 
     namespace "com.minspirit"
     defaultConfig {
-        applicationId "com.minspirit"
+        applicationId "com.minspirit.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
