@@ -1,8 +1,8 @@
 import React from 'react';
-import MinSpiritStack from './StackNavigator';
+import AppManager from './src/AppManager';
 
 function App() {
-  return <MinSpiritStack />;
+  return <AppManager />;
 }
 
 export default App;
