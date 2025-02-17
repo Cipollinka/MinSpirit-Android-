@@ -114,24 +114,13 @@ export default function AppManagerChild({navigation, route}) {
     if (checkLinkInArray(event.url, openInBrowser)) {
       try {
         console.log('openAppr', event.url);
-        if (event.url.split('package=').length !== 1) {
-          let _appPackage = event.url.split('package=');
-          let finalPackage = _appPackage[_appPackage.length - 1].split(';')[0];
-          SendIntentAndroid.isAppInstalled(finalPackage).then(isInstalled => {
-            if (isAppInstalled) {
-              SendIntentAndroid.openAppWithUri(event.url);
-            }
-          });
-        } else {
-          SendIntentAndroid.openAppWithUri(event.url).then((res) => {
-            console.log(res);
-            if (!res) Alert.alert(
-                'Ooops',
-                "It seems you don't have the bank app installed, wait for a redirect to the payment page",
-            );
-          });
-        }
-        // openURLInBrowser(event.url);
+        SendIntentAndroid.openChromeIntent(event.url).then(res => {
+          console.log('sending chrome intent', res);
+          if (!res) Alert.alert(
+              'Ooops',
+              "It seems you don't have the bank app installed, wait for a redirect to the payment page",
+          );
+        });
       } catch (error) {
         console.log(error);
         Alert.alert(

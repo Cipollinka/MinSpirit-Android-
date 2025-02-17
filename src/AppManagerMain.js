@@ -218,6 +218,9 @@ export default function AppManagerMain({navigation, route}) {
             onLoadEnd={() => finishLoading()}
             allowsInlineMediaPlayback={true}
             mediaPlaybackRequiresUserAction={false}
+            onLoad={event => {
+              console.log('Load event', event);
+            }}
             onError={syntEvent => {
               const {nativeEvent} = syntEvent;
               const {code} = nativeEvent;
@@ -232,20 +235,20 @@ export default function AppManagerMain({navigation, route}) {
               const {nativeEvent} = syntheticEvent;
               const {targetUrl} = nativeEvent;
               console.log('MAIN_OPEN_WINDOW', targetUrl);
-              if (
-                targetUrl.includes(
-                  'https://app.payment-gateway.io/static/loader.html',
-                )
-              ) {
-                return;
-              }
+              // if (
+              //   targetUrl.includes(
+              //     'https://app.payment-gateway.io/static/loader.html',
+              //   )
+              // ) {
+              //   return;
+              // }
               try {
                 if (Linking.canOpenURL(targetUrl)) {
                   navigation.navigate('child', {data: targetUrl});
                 }
               } catch (error) {}
             }}
-            setSupportMultipleWindows={false}
+            setSupportMultipleWindows={true}
             allowFileAccess={true}
             showsVerticalScrollIndicator={false}
             javaScriptCanOpenWindowsAutomatically={true}
